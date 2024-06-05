@@ -2,6 +2,9 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
+import { toast, ToastContainer } from "react-toastify";
+import { FirebaseError } from "firebase/app";
+
 
 function Signin() {
   const navigate = useNavigate();
@@ -22,12 +25,15 @@ function Signin() {
         navigate("/dashboard");
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
+      let errMsg = error.message.substring(9);
+      toast.error(errMsg);
     }
   };
 
   return (
     <main>
+
     <section>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">

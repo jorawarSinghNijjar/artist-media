@@ -50,6 +50,7 @@ function ArtistList() {
     <div className="flex flex-col gap-8">
       {artistListData.map(({ avatar, background, fullName, username }, idx) => (
         <ArtistCard
+          key={idx}
           avatar={avatar}
           background={background}
           fullName={fullName}

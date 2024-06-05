@@ -1,31 +1,34 @@
-import { createBrowserRouter, Router, RouterProvider } from "react-router-dom";
-import Signup from "./components/Signup";
-import Signin from "./components/Signin";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./components/Dashboard";
+import Signin from "./components/Signin";
+import Signup from "./components/Signup";
+import { ToastContainer } from "react-toastify";
 
 const router = createBrowserRouter([
-
   {
     path: "/",
-    element: <Signin />
+    element: <Signin />,
   },
   {
     path: "/signup",
-    element: <Signup />
+    element: <Signup />,
   },
   {
     path: "/signin",
-    element: <Signin />
+    element: <Signin />,
   },
   {
     path: "/dashboard",
-    element: <Dashboard />
+    element: <Dashboard />,
   },
-
-])
+]);
 function App() {
   return (
-   <RouterProvider router={router} />
+    <>
+      <ToastContainer />
+      <RouterProvider router={router} />
+    </>
   );
 }
 

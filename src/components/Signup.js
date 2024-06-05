@@ -1,7 +1,9 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
+import { toast, ToastContainer } from "react-toastify";
+import { FirebaseError } from "firebase/app";
 
 function Signup() {
   const navigate = useNavigate();
@@ -19,7 +21,9 @@ function Signup() {
         navigate("/signin");
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
+      let errMsg = error.message.substring(9);
+      toast.error(errMsg);
     }
   };
 
@@ -31,6 +35,7 @@ function Signup() {
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Register for a new account
             </h2>
+            <p className="text-center">Already have an account? <NavLink to="/signin" className="underline text-blue-700">Sign in Here</NavLink></p>
           </div>
 
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -44,7 +49,7 @@ function Signup() {
                 </label>
                 <div className="mt-2">
                   <input
-                    onChange={e => setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                     value={email}
                     id="email"
                     name="email"
@@ -66,7 +71,7 @@ function Signup() {
                 </div>
                 <div className="mt-2">
                   <input
-                    onChange={e => setPassword(e.target.value)}
+                    onChange={(e) => setPassword(e.target.value)}
                     value={password}
                     id="password"
                     name="password"
